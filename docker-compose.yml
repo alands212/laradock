@@ -124,6 +124,7 @@ services:
           - http_proxy
           - https_proxy
           - no_proxy
+      restart: always
       volumes:
         - ${APP_CODE_PATH_HOST}:${APP_CODE_PATH_CONTAINER}${APP_CODE_CONTAINER_FLAG}
         - ./php-worker/supervisord.d:/etc/supervisord.d
@@ -200,6 +201,7 @@ services:
           - http_proxy
           - https_proxy
           - no_proxy
+      restart: always
       volumes:
         - ./php-fpm/php${PHP_VERSION}.ini:/usr/local/etc/php/php.ini
         - ${APP_CODE_PATH_HOST}:${APP_CODE_PATH_CONTAINER}${APP_CODE_CONTAINER_FLAG}
@@ -284,6 +286,7 @@ services:
           - http_proxy
           - https_proxy
           - no_proxy
+      restart: always
       volumes:
         - ${APP_CODE_PATH_HOST}:${APP_CODE_PATH_CONTAINER}${APP_CODE_CONTAINER_FLAG}
         - ${NGINX_HOST_LOG_PATH}:/var/log/nginx
@@ -420,6 +423,7 @@ services:
           - https_proxy
           - no_proxy
           - MARIADB_VERSION=${MARIADB_VERSION}
+      restart: always
       volumes:
         - ${DATA_PATH_HOST}/mariadb:/var/lib/mysql
         - ${MARIADB_ENTRYPOINT_INITDB}:/docker-entrypoint-initdb.d
@@ -702,6 +706,7 @@ services:
         - MYSQL_USER=${PMA_USER}
         - MYSQL_PASSWORD=${PMA_PASSWORD}
         - MYSQL_ROOT_PASSWORD=${PMA_ROOT_PASSWORD}
+      restart: always
       ports:
         - "${PMA_PORT}:80"
       depends_on:
@@ -1213,6 +1218,7 @@ services:
     docker-in-docker:
       image: docker:dind
       privileged: true
+      restart: always
       volumes:
         - ${APP_CODE_PATH_HOST}:${APP_CODE_PATH_CONTAINER}
         - ${DATA_PATH_HOST}/dind:/var/lib/docker
