@@ -275,6 +275,14 @@ services:
       networks:
         - backend
 
+### nginx-proxy ################################################
+    nginx-proxy:
+      image: jwilder/nginx-proxy
+      restart: always
+      ports:
+        - "80:80"
+      volumes:
+        - /var/run/docker.sock:/tmp/docker.sock:ro
 ### NGINX Server #########################################
     nginx:
       build:
@@ -1626,11 +1634,3 @@ services:
         - postgres
       volumes:
         - ${DATA_PATH_HOST}/Confluence:/var/atlassian/application-data
-### nginx-proxy ################################################
-    nginx-proxy:
-      image: jwilder/nginx-proxy
-      restart: always
-      ports:
-        - "80:80"
-      volumes:
-        - /var/run/docker.sock:/tmp/docker.sock:ro
